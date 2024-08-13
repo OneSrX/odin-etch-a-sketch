@@ -1,14 +1,22 @@
-const GRID_SIZE = 16 * 16;
 const container = document.querySelector(".container");
+const button = document.querySelector("button");
 
-for (let i = 0; i < GRID_SIZE; i++) {
-  const div = document.createElement("div");
-  container.appendChild(div);
-}
-
-const divs = document.querySelectorAll(".container > div");
-divs.forEach((div) => {
-  div.addEventListener("mouseenter", () => {
-    div.style.backgroundColor = "red";
-  });
+button.addEventListener("click", () => {
+  let userInput = parseInt(prompt("Enter your preferred grid size: "));
+  container.innerHTML = "";
+  drawGrid(userInput);
 });
+
+function drawGrid(size = 16) {
+  for (let i = 0; i < size ** 2; i++) {
+    const div = document.createElement("div");
+    container.appendChild(div);
+  }
+
+  const divs = document.querySelectorAll(".container > div");
+  divs.forEach((div) => {
+    div.addEventListener("mouseenter", () => {
+      div.style.backgroundColor = "red";
+    });
+  });
+}
