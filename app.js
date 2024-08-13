@@ -5,3 +5,10 @@ for (let i = 0; i < GRID_SIZE; i++) {
   const div = document.createElement("div");
   container.appendChild(div);
 }
+
+const divs = document.querySelectorAll(".container > div");
+divs.forEach((div) => {
+  div.addEventListener("mouseenter", () => {
+    div.style.backgroundColor = "red";
+  });
+});
