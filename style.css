@@ -1,5 +1,5 @@
 /*************************/
-/* CSS Reset */
+/* CSS Reset *************/
 /*************************/
 *,
 *::after,
@@ -7,4 +7,33 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+/*************************/
+/*************************/
+/*************************/
+
+:root {
+  --grid-size: 16;
+  --square-size: 2rem;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.container {
+  height: auto;
+  display: flex;
+  flex-wrap: wrap;
+  width: calc(var(--square-size) * var(--grid-size));
+  aspect-ratio: 1/1;
+}
+
+.container div {
+  width: var(--square-size);
+  aspect-ratio: 1/1;
+  border: 1px solid black;
 }
