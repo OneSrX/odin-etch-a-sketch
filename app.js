@@ -38,7 +38,9 @@ function drawGrid(squares_per_side = 16) {
 }
 
 function getRandomColor() {
-  return `rgb(${Math.floor(Math.random() * 255)}, ${Math.floor(
-    Math.random() * 255
-  )}, ${Math.floor(Math.random() * 255)})`;
+  const R = Math.floor(Math.random() * 256);
+  const G = Math.floor(Math.random() * 256);
+  const B = Math.floor(Math.random() * 256);
+
+  return `rgba(${R}, ${G}, ${B})`;
 }
