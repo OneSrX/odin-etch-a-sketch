@@ -21,11 +21,18 @@ body {
   min-height: 100vh;
 }
 
-.wrapper {
+.border {
   border: 5px solid black;
 }
 
 .container {
+  width: 30rem;
   display: flex;
   flex-wrap: wrap;
+  aspect-ratio: 1/1;
+}
+
+.container div {
+  aspect-ratio: 1/1;
+  border: 1px solid #eee;
 }
