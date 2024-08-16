@@ -1,41 +1,44 @@
 const container = document.querySelector(".container");
-const button = document.querySelector("button");
-const PAD_WIDTH = 560;
+const resizeCanvasBtn = document.querySelector(".resize-canvas-btn");
+const PAD_Width = window.getComputedStyle(container).getPropertyValue("width");
 
-// set the default width of the divs container
-container.style.width = `${PAD_WIDTH}px`;
+// draw the grid with default size on page load
+drawGrid();
 
-function drawGrid(size = 16) {
-  for (let i = 0; i < size ** 2; i++) {
+resizeCanvasBtn.addEventListener("click", resizeCanvas);
+
+function resizeCanvas() {
+  let userInput = parseInt(
+    prompt("Choose number of squares per side (max: 100, min: 1)")
+  );
+
+  if (isNaN(userInput) || userInput <= 0 || userInput > 100) {
+    alert("Please enter a valid number!");
+    return;
+  }
+
+  container.innerHTML = ""; // clear existing grid
+  drawGrid(userInput); // re-draw the grid with the new size
+}
+
+function drawGrid(squares_per_side = 16) {
+  for (let i = 0; i < squares_per_side ** 2; i++) {
     const div = document.createElement("div");
     container.appendChild(div);
   }
 
   const divs = document.querySelectorAll(".container > div");
   divs.forEach((div) => {
-    div.style.cssText = `
-      width: calc(${PAD_WIDTH}px / ${size});
-      aspect-ratio: 1/1;
-      border: 1px solid #eee;
-    `;
+    div.style.width = `calc(${PAD_Width} / ${squares_per_side})`;
 
     div.addEventListener("mouseenter", () => {
-      div.style.backgroundColor = "red";
+      div.style.backgroundColor = getRandomColor();
     });
   });
 }
 
-// draw the grid with default size
-drawGrid();
-
-button.addEventListener("click", () => {
-  let userInput = parseInt(prompt("Enter your preferred grid size: "));
-
-  if (isNaN(userInput) || userInput <= 0 || userInput > 100) {
-    alert("Please enter a number between 1 and 100");
-    return;
-  }
-
-  container.innerHTML = ""; // clear existing grid
-  drawGrid(userInput); // re-draw the grid with the new size
-});
+function getRandomColor() {
+  return `rgb(${Math.floor(Math.random() * 255)}, ${Math.floor(
+    Math.random() * 255
+  )}, ${Math.floor(Math.random() * 255)})`;
+}
