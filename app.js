@@ -32,7 +32,15 @@ function drawGrid(squares_per_side = 16) {
     div.style.width = `calc(${PAD_Width} / ${squares_per_side})`;
 
     div.addEventListener("mouseenter", () => {
-      div.style.backgroundColor = getRandomColor();
+      if (div.style.backgroundColor) {
+        let currentOpacity = Number(div.style.opacity);
+        if (currentOpacity < 1) {
+          div.style.opacity = currentOpacity + 0.1;
+        }
+      } else {
+        div.style.opacity = 0.1;
+        div.style.backgroundColor = getRandomColor();
+      }
     });
   });
 }
@@ -42,5 +50,5 @@ function getRandomColor() {
   const G = Math.floor(Math.random() * 256);
   const B = Math.floor(Math.random() * 256);
 
-  return `rgba(${R}, ${G}, ${B})`;
+  return `rgb(${R}, ${G}, ${B})`;
 }
